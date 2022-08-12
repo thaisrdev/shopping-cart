@@ -1,5 +1,3 @@
-const { fetchProducts } = require('./helpers/fetchProducts');
-
 const createProductImageElement = (imageSource) => {
   const img = document.createElement('img');
   img.className = 'item__image';
@@ -29,12 +27,11 @@ const productsList = async () => {
   objects.results.forEach((element) => {
     const { id: sku, title: name, thumbnail: image } = element;
     const keys = { sku, name, image };
-    const items = document.getElementsByClassName('items');
+    const items = document.getElementsByClassName('items')[0];
     const product = createProductItemElement(keys);
     items.appendChild(product);    
   });
 };
-
 productsList();
 
 const getSkuFromProductItem = (item) => item.querySelector('span.item__sku').innerText;
