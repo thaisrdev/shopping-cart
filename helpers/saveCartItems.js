@@ -1,10 +1,5 @@
-const saveCartItems = async (argumento) => {
-  try {
-const localS = await localStorage.setItem('cartItems', argumento);
-return localS;
-  } catch (error) {
-  throw new Error('Erro...');
-}
+const saveCartItems = (argumento) => {
+localStorage.setItem('cartItems', argumento);
 };
 
 if (typeof module !== 'undefined') {
