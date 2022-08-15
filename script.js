@@ -1,4 +1,4 @@
-const createProductImageElement = (imageSource) => {
+ const createProductImageElement = (imageSource) => {
   const img = document.createElement('img');
   img.className = 'item__image';
   img.src = imageSource;
@@ -18,7 +18,7 @@ const createProductItemElement = ({ sku, name, image }) => {
   section.appendChild(createCustomElement('span', 'item__sku', sku));
   section.appendChild(createCustomElement('span', 'item__title', name));
   section.appendChild(createProductImageElement(image));
-  section.appendChild(createCustomElement('button', 'item__add', 'Adicionar ao carrinho!'));
+  section.appendChild(createCustomElement('button', 'item__add', 'Adicionar ao carrinho!')); //BOTAO
   return section;
 };
 
@@ -36,17 +36,30 @@ productsList();
 
 const getSkuFromProductItem = (item) => item.querySelector('span.item__sku').innerText;
 
-const cartItemClickListener = (event) => {
-  // coloque seu código aqui
-};
-
 const createCartItemElement = ({ sku, name, salePrice }) => {
   const li = document.createElement('li');
   li.className = 'cart__item';
   li.innerText = `SKU: ${sku} | NAME: ${name} | PRICE: $${salePrice}`;
   li.addEventListener('click', cartItemClickListener);
   return li;
+}; 
+
+const cartItemClickListener = (event) => {
+  const item = document.querySelector('.cart__item');
+  const cartItems = document.querySelector('.cart__items');
+  cartItems.removeChild(item); // 5
+}; 
+
+const fetchItems = async () => {
+  const objects = await fetchItem('MLB1341706310');
+  console.log(objects);
+   const { id: sku, title: name, price: salePrice } = objects;   
+    const cartItems = document.querySelector('.cart__items');
+    cartItems.appendChild(createCartItemElement({ sku, name, salePrice }));
+    const button = element.querySelector('item__add');
+    button.addEventListener('click', carrinho); // 4
 };
+fetchItems();
 
 fetchProducts('computador');
 
