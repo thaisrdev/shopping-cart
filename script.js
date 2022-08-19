@@ -85,5 +85,4 @@
 
   fetchProducts('computador');
 
-
   window.onload = () => { };
