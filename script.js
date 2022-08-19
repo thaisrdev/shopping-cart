@@ -38,7 +38,9 @@
     li.addEventListener('click', cartItemClickListener);
     return li;
   }; 
-
+  
+  let totalPrice = 0;
+  const campoPreco = document.querySelector('.total-price');
   const fetchItems = async (event) => {
     const pai = event.target.parentNode;
     const skus = getSkuFromProductItem(pai);
@@ -46,7 +48,12 @@
     const { id: sku, title: name, price: salePrice } = objects; 
     const li = createCartItemElement({ sku, name, salePrice });
     const carrinho = document.querySelector('.cart__items');
-    carrinho.appendChild(li);   
+    carrinho.appendChild(li);  
+    const preco = (element) => {
+      totalPrice += element;
+      return totalPrice;
+    };
+    campoPreco.innerText = `R$ ${(preco(salePrice))}`;
   };
 
   const productsList = async () => {
@@ -58,12 +65,11 @@
       const product = createProductItemElement(keys);
       const button = product.querySelector('.item__add');
       button.addEventListener('click', fetchItems); 
-      items.appendChild(product);       
+      items.appendChild(product);      
     });
   };
 
   const emptyCartButton = document.querySelector('.empty-cart');
-  console.log(cartItems);
 
   const esvaziarCarrinho = () => {
     while (cartItems.firstChild) {
