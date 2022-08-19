@@ -56,8 +56,10 @@
     campoPreco.innerText = `R$ ${(preco(salePrice))}`;
   };
 
+  const loading = document.getElementsByClassName('delete-loading')[0];
   const productsList = async () => {
     const objects = await fetchProducts('computador');  
+    loading.innerHTML = '';
     objects.results.forEach((element) => {
       const { id: sku, title: name, thumbnail: image } = element;
       const keys = { sku, name, image };
@@ -82,5 +84,6 @@
   productsList();
 
   fetchProducts('computador');
+
 
   window.onload = () => { };
